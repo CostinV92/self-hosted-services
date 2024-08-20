@@ -1,0 +1,20 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=Europe/Bucharest
+      - WEBUI_PORT=${QBT_WEB_PORT_INT}
+      - TORRENTING_PORT=${QBT_TORRENT_PORT}
+    volumes:
+      - ${QBITTORRENT_DIR}/config:/config
+      - ${QBITTORRENT_DIR}/downloads:/downloads/
+      - ${QBITTORRENT_DIR}/qbt_ui/:/qbt_ui # webui skins
+      - ${JELLYFIN_DIR}:/jellyfin # jellyfin folder
+    ports:
+      - ${QBT_WEB_PORT_EXT}:${QBT_WEB_PORT_INT}
+      - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}
+      - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}/udp
+    restart: unless-stopped
