@@ -12,7 +12,7 @@ services:
       - ${QBITTORRENT_DIR}/config:/config
       - ${QBITTORRENT_DIR}/downloads:/downloads/
       - ${QBITTORRENT_DIR}/qbt_ui/:/qbt_ui # webui skins
-      - ${JELLYFIN_DIR}:/jellyfin # jellyfin library for direct downloading
+      - ${JELLYFIN_MEDIA_DIR}:/jellyfin # jellyfin library for direct downloading
     ports:
       - ${QBT_WEB_PORT_EXT}:${QBT_WEB_PORT_INT}
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}
@@ -29,4 +29,19 @@ services:
       - '80:80'
       - '443:443'
       - '81:81' # admin page
+    restart: unless-stopped
+
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=Europe/Bucharest
+    volumes:
+      - ${JELLYFIN_CONFIG_DIR}/config:/config
+      - ${JELLYFIN_SERIES_DIR}:/data/series
+      - ${JELLYFIN_FILMS_DIR}:/data/films
+    ports:
+      - 8096:8096
     restart: unless-stopped

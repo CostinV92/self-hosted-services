@@ -1,3 +1,4 @@
 .env
 qbittorrent/
 nginx-proxy-manager/
+jellyfin/
