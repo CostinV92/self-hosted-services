@@ -12,9 +12,21 @@ services:
       - ${QBITTORRENT_DIR}/config:/config
       - ${QBITTORRENT_DIR}/downloads:/downloads/
       - ${QBITTORRENT_DIR}/qbt_ui/:/qbt_ui # webui skins
-      - ${JELLYFIN_DIR}:/jellyfin # jellyfin folder
+      - ${JELLYFIN_DIR}:/jellyfin # jellyfin library for direct downloading
     ports:
       - ${QBT_WEB_PORT_EXT}:${QBT_WEB_PORT_INT}
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}/udp
+    restart: unless-stopped
+
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    volumes:
+      - ${NGINX_DIR}/data:/data
+      - ${NGINX_DIR}/letsencrypt:/etc/letsencrypt
+    ports:
+      - '80:80'
+      - '443:443'
+      - '81:81' # admin page
     restart: unless-stopped
