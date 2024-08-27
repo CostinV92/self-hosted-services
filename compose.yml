@@ -1,4 +1,14 @@
 services:
+
+  landing-page:
+    image: flashspys/nginx-static:latest
+    container_name: landing-page
+    volumes:
+      - ${LANDING_PAGE_DIR}:/static
+    ports:
+      - 8080:80
+    restart: unless-stopped
+
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -9,9 +19,9 @@ services:
       - WEBUI_PORT=${QBT_WEB_PORT_INT}
       - TORRENTING_PORT=${QBT_TORRENT_PORT}
     volumes:
-      - ${QBITTORRENT_DIR}/config:/config
-      - ${QBITTORRENT_DIR}/downloads:/downloads/
-      - ${QBITTORRENT_DIR}/qbt_ui/:/qbt_ui # webui skins
+      - ${QBT_DIR}/config:/config
+      - ${QBT_DIR}/downloads:/downloads/
+      - ${QBT_DIR}/qbt_ui/:/qbt_ui # webui skins
       - ${JELLYFIN_MEDIA_DIR}:/jellyfin # jellyfin library for direct downloading
     ports:
       - ${QBT_WEB_PORT_EXT}:${QBT_WEB_PORT_INT}
