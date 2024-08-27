@@ -1,12 +1,24 @@
 services:
 
-  landing-page:
+  nginx-static:
     image: flashspys/nginx-static:latest
-    container_name: landing-page
+    container_name: nginx-static
     volumes:
       - ${LANDING_PAGE_DIR}:/static
     ports:
       - 8080:80
+    restart: unless-stopped
+
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    volumes:
+      - ${NGINX_DIR}/data:/data
+      - ${NGINX_DIR}/letsencrypt:/etc/letsencrypt
+    ports:
+      - '80:80'
+      - '443:443'
+      - '81:81' # admin page
     restart: unless-stopped
 
   qbittorrent:
@@ -24,21 +36,9 @@ services:
       - ${QBT_DIR}/qbt_ui/:/qbt_ui # webui skins
       - ${JELLYFIN_MEDIA_DIR}:/jellyfin # jellyfin library for direct downloading
     ports:
-      - ${QBT_WEB_PORT_EXT}:${QBT_WEB_PORT_INT}
+      - ${QBT_WEB_PORT}:${QBT_WEB_PORT}
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}/udp
-    restart: unless-stopped
-
-  nginx-proxy-manager:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: nginx-proxy-manager
-    volumes:
-      - ${NGINX_DIR}/data:/data
-      - ${NGINX_DIR}/letsencrypt:/etc/letsencrypt
-    ports:
-      - '80:80'
-      - '443:443'
-      - '81:81' # admin page
     restart: unless-stopped
 
   jellyfin:
@@ -49,9 +49,9 @@ services:
       - PGID=${GROUP_ID}
       - TZ=Europe/Bucharest
     volumes:
-      - ${JELLYFIN_CONFIG_DIR}/config:/config
+      - ${JELLYFIN_DIR}/config:/config
       - ${JELLYFIN_SERIES_DIR}:/data/series
       - ${JELLYFIN_FILMS_DIR}:/data/films
     ports:
-      - 8096:8096
+      - ${JELLYFIN_PORT}:${JELLYFIN_PORT}
     restart: unless-stopped
