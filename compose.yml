@@ -28,7 +28,7 @@ services:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
       - TZ=Europe/Bucharest
-      - WEBUI_PORT=${QBT_WEB_PORT_INT}
+      - WEBUI_PORT=${QBT_WEB_PORT}
       - TORRENTING_PORT=${QBT_TORRENT_PORT}
     volumes:
       - ${QBT_DIR}/config:/config
