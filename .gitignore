@@ -1,4 +1,5 @@
 .env
+git_access_token
 qbittorrent/
 nginx-proxy-manager/
 jellyfin/
