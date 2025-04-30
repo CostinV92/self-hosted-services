@@ -58,3 +58,12 @@ services:
     ports:
       - ${JELLYFIN_PORT}:${JELLYFIN_PORT}
     restart: unless-stopped
+
+  trilium:
+    image: triliumnext/notes:latest
+    container_name: trilium
+    ports:
+      - "8090:8080"
+    volumes:
+      - ${TRILIUM_DIR}:/home/node/trilium-data
+    restart: unless-stopped
