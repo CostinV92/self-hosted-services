@@ -51,6 +51,8 @@ services:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
       - TZ=Europe/Bucharest
+    devices:
+      - /dev/dri/:/dev/dri/
     volumes:
       - ${JELLYFIN_DIR}/config:/config
       - ${JELLYFIN_SERIES_DIR}:/data/series
