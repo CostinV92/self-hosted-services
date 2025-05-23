@@ -7,12 +7,3 @@ services:
     volumes:
       - ${TRILIUM_DATA}:/home/node/trilium-data
     restart: unless-stopped
-    networks:
-      - trilium_net
-
-networks:
-  trilium_net:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: ${TRILIUM_SUBNET}
