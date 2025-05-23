@@ -13,3 +13,6 @@ nginx-proxy-manager/data/
 
 qbittorrent/.env
 qbittorrent/data/
+
+landing-page/.env
+landing-page/data/

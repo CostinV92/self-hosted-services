@@ -1,34 +1,5 @@
 services:
 
-  nginx-static:
-    image: flashspys/nginx-static:latest
-    container_name: nginx-static
-    volumes:
-      - ${LANDING_PAGE_DIR}:/static
-    ports:
-      - 8080:80
-    restart: unless-stopped
-
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
-    environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
-      - TZ=Europe/Bucharest
-      - WEBUI_PORT=${QBT_WEB_PORT}
-      - TORRENTING_PORT=${QBT_TORRENT_PORT}
-    volumes:
-      - ${QBT_DIR}/config:/config
-      - ${QBT_DIR}/downloads:/downloads/
-      - ${QBT_DIR}/qbt_ui/:/qbt_ui # webui skins
-      - ${JELLYFIN_MEDIA_DIR}:/jellyfin # jellyfin library for direct downloading
-    ports:
-      - ${QBT_WEB_PORT}:${QBT_WEB_PORT}
-      - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}
-      - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}/udp
-    restart: unless-stopped
-
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
