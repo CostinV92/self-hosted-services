@@ -1,4 +1,7 @@
 .env
+authentik/.env
+authentik/data/
+
 git_access_token
 qbittorrent/
 nginx-proxy-manager/
