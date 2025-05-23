@@ -1,10 +1,6 @@
 .env
-authentik/.env
-authentik/data/
 
 git_access_token
-qbittorrent/
-nginx-proxy-manager/
-jellyfin/
-landing-page/
-trilium/
+
+authentik/.env
+authentik/data/
