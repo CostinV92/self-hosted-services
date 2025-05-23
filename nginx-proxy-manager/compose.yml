@@ -1,0 +1,16 @@
+services:
+
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+    volumes:
+      - ${NGINX_DATA}/data:/data
+      - ${NGINX_DATA}/letsencrypt:/etc/letsencrypt
+    ports:
+      - '${NGINX_HOST_HTTP_PORT}:${NGINX_GUEST_HTTP_PORT}'
+      - '${NGINX_HOST_HTTPS_PORT}:${NGINX_GUEST_HTTPS_PORT}'
+      - '${NGINX_HOST_ADMIN_PORT}:${NGINX_GUEST_ADMIN_PORT}' # admin page
+    restart: unless-stopped

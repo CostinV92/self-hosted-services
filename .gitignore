@@ -7,3 +7,6 @@ authentik/data/
 
 trilium/.env
 trilium/data/
+
+nginx-proxy-manager/.env
+nginx-proxy-manager/data/
