@@ -10,3 +10,6 @@ trilium/data/
 
 nginx-proxy-manager/.env
 nginx-proxy-manager/data/
+
+qbittorrent/.env
+qbittorrent/data/
