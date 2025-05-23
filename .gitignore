@@ -4,3 +4,6 @@ git_access_token
 
 authentik/.env
 authentik/data/
+
+trilium/.env
+trilium/data/
