@@ -18,3 +18,12 @@ services:
       - ${QBT_WEB_PORT}:${QBT_WEB_PORT}
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}/udp
+    networks:
+      - qbittorrent_network
+
+networks:
+  qbittorrent_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${QBT_NETWORK}

@@ -39,6 +39,7 @@ Prerequisites: `docker`, `docker compose`
 - `AUTHENTIK_DATA`: path to authentik data directory.
 - `AUTHENTIK_PG_PASS`: password for postgress.
 - `AUTHENTIK_SECRET_KEY`: secret key for authentik.
+- `AUTHENTIK_NETWORK`: CIDR network for authentik containers.
 
 ### nginx-proxy-manager
 
@@ -46,25 +47,30 @@ Prerequisites: `docker`, `docker compose`
 - `NGINX_HOST_HTTP_PORT`: port on the host to listen for http requests.
 - `NGINX_HOST_HTTPS_PORT`: port on the host to listen for https requests.
 - `NGINX_HOST_ADMIN_PORT`: port on the host where the npm admin app is available.
+- `NGINX_NETWORK`: CIDR network for npm container.
 
 ### landing-page
 
 - `LANDING_PAGE_DATA`: path to the landing-page data directory (landing page to serve).
 - `LANDING_PAGE_HOST_PORT`: port on the host where the landing page is available.
+- `LANDING_PAGE_NETWORK`: CIDR network for landing-page container.
 
 ### qbittorrent
 
 - `QBT_DATA`: path to qBittorrent data directory.
 - `QBT_WEB_PORT`: qBittorrent web ui port.
 - `QBT_TORRENT_PORT`: qBittorrent torrenting port.
+- `QBT_NETWORK`: CIDR network for qBittorrent container.
 
 ### jellyfin
 
 - `JELLYFIN_DATA`: path to jellyfin data directory.
 - `JELLYFIN_PORT`: port on the host where jellyfin is available.
+- `JELLYFIN_NETWORK`: CIDR network for jellyfin container.
 - `FILMS_DIR`: path to Jellyfin films. (optional, depending on Jellyfin setup)
 - `SERIES_DIR`: path to Jellyfin series. (optional, depending on Jellyfin setup)
 
 ### trilium
 
 - `TRILIUM_DATA`: path to trilium data directory.
+- `TRILIUM_NETWORK`: CIDR network for trilium container.

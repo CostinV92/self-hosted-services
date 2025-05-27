@@ -18,6 +18,8 @@ services:
       POSTGRES_DB: ${PG_DB:-authentik}
     env_file:
       - .env
+    networks:
+      - authentik_network
 
   redis:
     image: docker.io/library/redis:alpine
@@ -32,6 +34,8 @@ services:
       timeout: 3s
     volumes:
       - authentik_redis:/data
+    networks:
+      - authentik_network
 
   server:
     image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.4}
@@ -58,6 +62,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    networks:
+      - authentik_network
 
   worker:
     image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.4}
@@ -90,9 +96,18 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    networks:
+      - authentik_network
 
 volumes:
   authentik_database:
     driver: local
   authentik_redis:
     driver: local
+
+networks:
+  authentik_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${AUTHENTIK_NETWORK}

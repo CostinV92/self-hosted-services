@@ -16,3 +16,12 @@ services:
     ports:
       - ${JELLYFIN_PORT}:${JELLYFIN_PORT}
     restart: unless-stopped
+    networks:
+      - jellyfin_network
+
+networks:
+  jellyfin_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${JELLYFIN_NETWORK}

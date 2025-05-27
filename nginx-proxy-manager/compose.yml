@@ -14,3 +14,12 @@ services:
       - '${NGINX_HOST_HTTPS_PORT}:443'
       - '${NGINX_HOST_ADMIN_PORT}:81' # admin page
     restart: unless-stopped
+    networks:
+      - nginx_network
+
+networks:
+  nginx_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NGINX_NETWORK}
