@@ -23,9 +23,8 @@ Prerequisites: `docker`, `docker compose`
 2. Open `.env.global` and change all global environment variables to match your setup (see Config).
 3. Rename every `.env.local.example` in every service directory to `.env.local`.
 4. Open every `.env.local` in every service directory and change all service environment variables to match your setup (see Config).
-5. From the base directory run `scripts/make_env.sh`. This will create `.env` files in every service directory.
-6. From the base directory run `scripts/services_control.sh up` to start all the services.
-7. Set up the services and enjoy.
+5. Run `./scripts/services_control.sh [service] <up|down>` to start services.
+6. Set up the services and enjoy.
 
 ## Config
 
