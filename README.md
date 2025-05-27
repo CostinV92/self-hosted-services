@@ -44,11 +44,8 @@ Prerequisites: `docker`, `docker compose`
 
 - `NGINX_DATA`: path to nginx-proxy-manager data directory.
 - `NGINX_HOST_HTTP_PORT`: port on the host to listen for http requests.
-- `NGINX_GUEST_HTTP_PORT`: port on the container to forward http requests to.
 - `NGINX_HOST_HTTPS_PORT`: port on the host to listen for https requests.
-- `NGINX_GUEST_HTTPS_PORT`: port on the container to forward https requests to.
 - `NGINX_HOST_ADMIN_PORT`: port on the host where the npm admin app is available.
-- `NGINX_GUEST_ADMIN_PORT`: port on the container where the npm admin app is available.
 
 ### landing-page
 
