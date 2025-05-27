@@ -1,13 +1,15 @@
 # lab-infra
 
-Docker infrastructure for self hosted services. The infrastructure is thought as a reverse proxy serving diferrent services on the same domain. The `example-landing-page` is a static link tree like web page, created by [Ungeschneuer](https://github.com/ungeschneuer).
+Docker infrastructure for self hosted services. The infrastructure is thought as a reverse proxy serving diferrent services. The `example-landing-page` is a static link tree like web page, created by [Ungeschneuer](https://github.com/ungeschneuer).
 
 ## Services
 
-- nginx-static ([nginx-static](https://github.com/docker-nginx-static/docker-nginx-static)): Super Lightweight Nginx Image to serve the landing page.
-- nginx-proxy-manager ([nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)): Docker container for managing Nginx proxy hosts with a simple, powerful interface.
-- qbittorrent ([linuxserver/qbittorrent](https://github.com/linuxserver/docker-qbittorrent)): linuxserver.io Docker container for running Qbittorrent.
-- jellyfin ([linuxserver/jellfin](https://github.com/linuxserver/docker-jellyfin)): linuxserver.io Docker container for running Jellyfin.
+- [authentik](https://github.com/goauthentik/authentik): an open-source Identity Provider that emphasizes flexibility and versatility, with support for a wide set of protocols.
+- [nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager): Docker container for managing Nginx proxy hosts with a simple, powerful interface.
+- [landing-page](https://github.com/docker-nginx-static/docker-nginx-static): super Lightweight Nginx Image to serve the landing page.
+- [qbittorrent](https://github.com/linuxserver/docker-qbittorrent): linuxserver.io Docker container for running Qbittorrent.
+- [jellfin](https://github.com/linuxserver/docker-jellyfin): linuxserver.io Docker container for running Jellyfin.
+- [trilium](https://github.com/TriliumNext/Notes): a free and open-source, cross-platform hierarchical note taking application with focus on building large personal knowledge bases.
 
 ## How to run
 
@@ -15,26 +17,57 @@ Docker infrastructure for self hosted services. The infrastructure is thought as
 
 This is not an exhaustive guide to running and glueing all the services together, but just to start the services and the infrastructure needed to glue them together. See documentation for every particular service.
 
-Prerequisites: `Docker`, `Docker Compose`
+Prerequisites: `docker`, `docker compose`
 
-1. Rename `.env.example` to `.env`.
-2. Open `.env` and change all environment variables to match your setup (see Config).
-3. In the same directory run `docker compose up -d` to start the services.
-4. Set up all services.
-5. Set up port forwarding on your router for ports 80 (HTTP), 443(HTTPS) and all other needed ports.
-6. Open a web browser, navigate to `127.0.0.1:81` and set up reverse proxy for services (see [nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)).
+1. Rename `.env.global.example` to `.env.global`.
+2. Open `.env.global` and change all global environment variables to match your setup (see Config).
+3. Rename every `.env.local.example` in every service directory to `.env.local`.
+4. Open every `.env.local` in every service directory and change all service environment variables to match your setup (see Config).
+5. From the base directory run `scripts/make_env.sh`. This will create `.env` files in every service directory.
+6. From the base directory run `scripts/services_control.sh up` to start all the services.
+7. Set up the services and enjoy.
 
 ## Config
 
-- `BASE_DIR`: path to main project directory (i.e. path to the repo). This directory contains all services' configs.
+### Global env variables
+
 - `USER_ID` and `GROUP_ID`: see `PUID` and `PGID` from [linuxserver/qbittorrent](https://github.com/linuxserver/docker-qbittorrent) or [linuxserver/jellfin](https://github.com/linuxserver/docker-jellyfin).
-- `LANDING_PAGE_DIR`: path to the landing page source code.
-- `QBT_DIR`: path to qBittorrent configs.
+- `MEDIA_DIR`: path to the media library; used by jellyfin to serve media files, and by qbittorrent to download media to.
+
+### authentik
+
+- `AUTHENTIK_DATA`: path to authentik data directory.
+- `AUTHENTIK_PG_PASS`: password for postgress.
+- `AUTHENTIK_SECRET_KEY`: secret key for authentik.
+
+### nginx-proxy-manager
+
+- `NGINX_DATA`: path to nginx-proxy-manager data directory.
+- `NGINX_HOST_HTTP_PORT`: port on the host to listen for http requests.
+- `NGINX_GUEST_HTTP_PORT`: port on the container to forward http requests to.
+- `NGINX_HOST_HTTPS_PORT`: port on the host to listen for https requests.
+- `NGINX_GUEST_HTTPS_PORT`: port on the container to forward https requests to.
+- `NGINX_HOST_ADMIN_PORT`: port on the host where the npm admin app is available.
+- `NGINX_GUEST_ADMIN_PORT`: port on the container where the npm admin app is available.
+
+### landing-page
+
+- `LANDING_PAGE_DATA`: path to the landing-page data directory (landing page to serve).
+- `LANDING_PAGE_HOST_PORT`: port on the host where the landing page is available.
+
+### qbittorrent
+
+- `QBT_DATA`: path to qBittorrent data directory.
 - `QBT_WEB_PORT`: qBittorrent web ui port.
 - `QBT_TORRENT_PORT`: qBittorrent torrenting port.
-- `JELLYFIN_MEDIA_DIR`: path to Jellyfin library.
-- `JELLYFIN_DIR`: path to Jellifin configs.
-- `JELLYFIN_FILMS_DIR`: path to Jellyfin films.
-- `JELLYFIN_SERIES_DIR`: path to Jellyfin series.
-- `JELLYFIN_PORT`: Jellyfin port.
-- `NGINX_DIR`: path to Nginx Proxy Manager configs.
+
+### jellyfin
+
+- `JELLYFIN_DATA`: path to jellyfin data directory.
+- `JELLYFIN_PORT`: port on the host where jellyfin is available.
+- `FILMS_DIR`: path to Jellyfin films. (optional, depending on Jellyfin setup)
+- `SERIES_DIR`: path to Jellyfin series. (optional, depending on Jellyfin setup)
+
+### trilium
+
+- `TRILIUM_DATA`: path to trilium data directory.
