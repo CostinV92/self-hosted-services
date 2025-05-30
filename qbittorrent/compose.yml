@@ -20,6 +20,7 @@ services:
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}/udp
     networks:
       - qbittorrent_network
+    restart: unless-stopped
 
 networks:
   qbittorrent_network:
