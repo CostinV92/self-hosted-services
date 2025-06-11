@@ -7,7 +7,7 @@ COMMAND=""
 SERVICE=""
 
 usage() {
-  echo "Usage: "$0" [service] <up|down>"
+  echo "Usage: "$0" [service] <up|down|restart>"
   exit 1
 }
 
@@ -27,7 +27,7 @@ parse_args() {
     usage
   fi
 
-  if [[ "$COMMAND" != "up" && "$COMMAND" != "down" ]]; then
+  if [[ "$COMMAND" != "up" && "$COMMAND" != "down" && "$COMMAND" != "restart" ]]; then
     usage
   fi
 }
@@ -56,11 +56,11 @@ cd_and_up() {
     make_env "$service_name"
   fi
 
-  if [[ "$cmd" == "up" ]]; then
-    docker compose up -d
-  elif [[ "$cmd" == "down" ]]; then
-    docker compose down
-  fi
+  case "$cmd" in
+    "up") docker compose up -d ;;
+    "restart") docker compose restart ;;
+    "down") docker compose down ;;
+  esac
 }
 
 up_all_services() {
