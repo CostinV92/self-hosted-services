@@ -37,13 +37,13 @@ make_env_service() {
   fi
 
   # If this is a service directory
-  if [[ ! -f "$service_dir/compose.yml" || ! -f "$service_dir/.env.local" ]]; then
+  if [[ ! -f "$service_dir/compose.yml" || ! -f "$service_dir/env.local" ]]; then
     echo "Service "$service_name" is not a valid service"
     return
   fi
 
   echo "Creating .env for "$service_name""
-  cat "$BASE_DIR/.env.global" "$service_dir/.env.local" > "$service_dir/.env"
+  cat "$BASE_DIR/env.global" "$service_dir/env.local" > "$service_dir/.env"
 }
 
 make_env_all() {
@@ -55,7 +55,7 @@ make_env_all() {
     fi
 
     # If this is a service directory
-    if [[ ! -f "$dir/compose.yml" || ! -f "$dir/.env.local" ]]; then
+    if [[ ! -f "$dir/compose.yml" || ! -f "$dir/env.local" ]]; then
       continue
     fi
 
@@ -65,8 +65,8 @@ make_env_all() {
 
 main() {
   # Ensure .env.global exists
-  if [[ ! -f "$BASE_DIR/.env.global" ]]; then
-    err "Error: .env.global not found in "$BASE_DIR""
+  if [[ ! -f "$BASE_DIR/env.global" ]]; then
+    err "Error: env.global not found in "$BASE_DIR""
   fi
 
   parse_args "$#" "$@"
