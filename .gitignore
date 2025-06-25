@@ -5,17 +5,17 @@ git_access_token
 authentik/.env
 authentik/.env.local
 
-landing-page/.env
-landing-page/.env.local
+nginx-static/.env
+nginx-static/.env.local
 
 jellyfin/.env
 jellyfin/.env.local
 
-nginx-proxy-manager/.env
-nginx-proxy-manager/.env.local
+npm/.env
+npm/.env.local
 
-qbittorrent/.env
-qbittorrent/.env.local
+qbt/.env
+qbt/.env.local
 
 trilium/.env
 trilium/.env.local
