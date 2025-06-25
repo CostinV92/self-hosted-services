@@ -1,8 +1,8 @@
 services:
 
-  qbittorrent:
+  qbt:
     image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
+    container_name: qbt
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
@@ -19,11 +19,11 @@ services:
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}
       - ${QBT_TORRENT_PORT}:${QBT_TORRENT_PORT}/udp
     networks:
-      - qbittorrent_network
+      - qbt_network
     restart: unless-stopped
 
 networks:
-  qbittorrent_network:
+  qbt_network:
     driver: bridge
     ipam:
       config:
