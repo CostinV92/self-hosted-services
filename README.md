@@ -1,7 +1,5 @@
 # lab-infra
 
-Docker infrastructure for self hosted services. The infrastructure is thought as a reverse proxy serving diferrent services. The `example-landing-page` is a static link tree like web page, created by [Ungeschneuer](https://github.com/ungeschneuer).
-
 ## Services
 
 - [authentik](https://github.com/goauthentik/authentik): an open-source Identity Provider that emphasizes flexibility and versatility, with support for a wide set of protocols.
