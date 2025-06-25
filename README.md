@@ -4,7 +4,7 @@
 
 - [authentik](https://github.com/goauthentik/authentik): an open-source Identity Provider that emphasizes flexibility and versatility, with support for a wide set of protocols.
 - [nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager): Docker container for managing Nginx proxy hosts with a simple, powerful interface.
-- [landing-page](https://github.com/docker-nginx-static/docker-nginx-static): super Lightweight Nginx Image to serve the landing page.
+- [nginx-static](https://github.com/docker-nginx-static/docker-nginx-static): super Lightweight Nginx Image to serve the landing page.
 - [qbittorrent](https://github.com/linuxserver/docker-qbittorrent): linuxserver.io Docker container for running Qbittorrent.
 - [jellfin](https://github.com/linuxserver/docker-jellyfin): linuxserver.io Docker container for running Jellyfin.
 - [trilium](https://github.com/TriliumNext/Notes): a free and open-source, cross-platform hierarchical note taking application with focus on building large personal knowledge bases.
@@ -46,11 +46,11 @@ Prerequisites: `docker`, `docker compose`
 - `NGINX_HOST_ADMIN_PORT`: port on the host where the npm admin app is available.
 - `NGINX_NETWORK`: CIDR network for npm container.
 
-### landing-page
+### nginx-static
 
-- `LANDING_PAGE_DATA`: path to the landing-page data directory (landing page to serve).
-- `LANDING_PAGE_HOST_PORT`: port on the host where the landing page is available.
-- `LANDING_PAGE_NETWORK`: CIDR network for landing-page container.
+- `NGINX_STATIC_DATA`: path to the data directory (static page to serve).
+- `NGINX_STATIC_HOST_PORT`: port on the host where the static page is available.
+- `NGINX_STATIC_NETWORK`: CIDR network for nginx-static container.
 
 ### qbittorrent
 

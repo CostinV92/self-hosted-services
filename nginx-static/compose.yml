@@ -1,19 +1,18 @@
 services:
-
   nginx-static:
     image: flashspys/nginx-static:latest
     container_name: nginx-static
     volumes:
-      - ${LANDING_PAGE_DATA}:/static
+      - ${NGINX_STATIC_DATA}:/static
     ports:
-      - ${LANDING_PAGE_HOST_PORT}:80
+      - ${NGINX_STATIC_HOST_PORT}:80
     restart: unless-stopped
     networks:
-      - landing_page_network
+      - nginx_static_network
 
 networks:
-  landing_page_network:
+  nginx_static_network:
     driver: bridge
     ipam:
       config:
-        - subnet: ${LANDING_PAGE_NETWORK}
+        - subnet: ${NGINX_STATIC_NETWORK}
