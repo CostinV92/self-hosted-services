@@ -1,5 +1,7 @@
 # lab-infra
 
+### This repo is discontinued. All services were moved to the [new repo](https://github.com/CostinV92/lab-infra). 
+
 ## Services
 
 - [authentik](https://github.com/goauthentik/authentik): an open-source Identity Provider that emphasizes flexibility and versatility, with support for a wide set of protocols.
